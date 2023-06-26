@@ -19,11 +19,25 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Despesas Pessoais'),
-        ),
-        body: const Center(
-          child: Text('Versão Inicial!'),
-        ));
+      appBar: AppBar(
+        title: const Text('Despesas Pessoais'),
+      ),
+      body: const Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          SizedBox(
+            child: Card(
+              color: Colors.blue,
+              elevation: 5,
+              child: Text('Gráfico'),
+            ),
+          ),
+          Card(
+            child: Text('Lista de Trasações'),
+          ),
+        ],
+      ),
+    );
   }
 }
