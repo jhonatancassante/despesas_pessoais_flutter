@@ -10,6 +10,26 @@ class FormularioTransacao extends StatelessWidget {
 
   FormularioTransacao(this.aoEnviar, {super.key});
 
+  String? _validarCampo(valor) {
+    if (valor == null || valor.isEmpty) {
+      return 'Esse campo não pode estar vazio!';
+    }
+    return null;
+  }
+
+  _enviarFormulario() {
+    if (_formKey.currentState!.validate()) {
+      final titulo = tituloController.text;
+      final valor = double.tryParse(valorController.text) ?? 0.0;
+      aoEnviar(titulo, valor);
+    }
+  }
+
+  _cancelarFormulario() {
+    tituloController.clear();
+    valorController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -22,47 +42,32 @@ class FormularioTransacao extends StatelessWidget {
             children: [
               TextFormField(
                 controller: tituloController,
+                onFieldSubmitted: (_) => _enviarFormulario(),
                 decoration: const InputDecoration(
                   labelText: 'Título',
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Esse campo não pode estar vazio!';
-                  }
-                  return null;
-                },
+                validator: _validarCampo,
               ),
               TextFormField(
                 controller: valorController,
+                keyboardType: const TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+                onFieldSubmitted: (_) => _enviarFormulario(),
                 decoration: const InputDecoration(
                   labelText: 'Valor (R\$)',
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Esse campo não pode estar vazio!';
-                  }
-                  return null;
-                },
+                validator: _validarCampo,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      tituloController.clear();
-                      valorController.clear();
-                    },
+                  TextButton(
+                    onPressed: _cancelarFormulario,
                     child: const Text('Cancelar'),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        final titulo = tituloController.text;
-                        final valor =
-                            double.tryParse(valorController.text) ?? 0.0;
-                        aoEnviar(titulo, valor);
-                      }
-                    },
+                  TextButton(
+                    onPressed: _enviarFormulario,
                     child: const Text('Nova Transação'),
                   ),
                 ],
