@@ -1,3 +1,4 @@
+import 'package:despesas_pessoal/cores.dart';
 import 'package:despesas_pessoal/models/transacao.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -16,6 +17,9 @@ class DespesasPessoais extends StatelessWidget {
 }
 
 class HomePage extends StatelessWidget {
+  final tituloController = TextEditingController();
+  final valorController = TextEditingController();
+
   final _transacoes = [
     Transacao(
       id: 't1',
@@ -40,7 +44,6 @@ class HomePage extends StatelessWidget {
         title: const Text('Despesas Pessoais'),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           const SizedBox(
@@ -62,7 +65,7 @@ class HomePage extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.purple[900] as Color,
+                          color: corPrimaria as Color,
                           width: 2,
                         ),
                       ),
@@ -72,7 +75,7 @@ class HomePage extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
-                          color: Colors.purple[900],
+                          color: corPrimaria,
                         ),
                       ),
                     ),
@@ -98,6 +101,56 @@ class HomePage extends StatelessWidget {
                 ),
               );
             }).toList(),
+          ),
+          Card(
+            elevation: 5,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: tituloController,
+                    style: TextStyle(
+                      color: corPrimaria,
+                    ),
+                    decoration: const InputDecoration(
+                      labelText: 'Título',
+                    ),
+                  ),
+                  TextField(
+                    controller: valorController,
+                    decoration: const InputDecoration(
+                      labelText: 'Valor (R\$)',
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          print(tituloController.text);
+                        },
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStatePropertyAll(corPrimaria),
+                        ),
+                        child: const Text('Cancelar'),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          print(valorController.text);
+                        },
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStatePropertyAll(corPrimaria),
+                        ),
+                        child: const Text('Nova Transação'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
