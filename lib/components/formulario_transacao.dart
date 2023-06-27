@@ -6,7 +6,9 @@ class FormularioTransacao extends StatelessWidget {
   final tituloController = TextEditingController();
   final valorController = TextEditingController();
 
-  FormularioTransacao({super.key});
+  final void Function(String, double) aoEnviar;
+
+  FormularioTransacao(this.aoEnviar, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,9 @@ class FormularioTransacao extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    print(valorController.text);
+                    final titulo = tituloController.text;
+                    final valor = double.tryParse(valorController.text) ?? 0.0;
+                    aoEnviar(titulo, valor);
                   },
                   style: ButtonStyle(
                     foregroundColor: MaterialStatePropertyAll(corPrimaria),

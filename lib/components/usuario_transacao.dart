@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:despesas_pessoal/components/formulario_transacao.dart';
 import 'package:despesas_pessoal/components/lista_transacao.dart';
 import 'package:flutter/material.dart';
@@ -27,12 +29,25 @@ class _UsuarioTransacaoState extends State<UsuarioTransacao> {
     ),
   ];
 
+  _adicionaTransacao(String titulo, double valor) {
+    final novaTransacao = Transacao(
+      id: Random().nextDouble().toString(),
+      titulo: titulo,
+      valor: valor,
+      data: DateTime.now(),
+    );
+
+    setState(() {
+      _transacoes.add(novaTransacao);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ListaTransacao(_transacoes),
-        FormularioTransacao(),
+        FormularioTransacao(_adicionaTransacao),
       ],
     );
   }

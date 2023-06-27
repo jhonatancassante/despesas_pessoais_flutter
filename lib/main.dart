@@ -1,4 +1,5 @@
 import 'package:despesas_pessoal/components/usuario_transacao.dart';
+import 'package:despesas_pessoal/styles/cores.dart';
 import 'package:flutter/material.dart';
 
 main() => runApp(const DespesasPessoais());
@@ -22,18 +23,24 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Despesas Pessoais'),
+        backgroundColor: corPrimaria,
       ),
-      body: const Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SizedBox(
             child: Card(
-              color: Colors.blue,
+              color: corPrimaria,
               elevation: 5,
-              child: Text('Gráfico'),
+              child: Text(
+                'Gráfico',
+                style: TextStyle(
+                  color: corTextoPrimaria,
+                ),
+              ),
             ),
           ),
-          UsuarioTransacao(),
+          const UsuarioTransacao(),
         ],
       ),
     );
