@@ -12,54 +12,59 @@ class ListaTransacao extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: transacoes.map((tr) {
-        return Card(
-          child: Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: corPrimaria as Color,
-                    width: 2,
+    return SizedBox(
+      height: 300,
+      child: ListView.builder(
+        itemCount: transacoes.length,
+        itemBuilder: (ctx, index) {
+          final tr = transacoes[index];
+          return Card(
+            child: Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 10,
                   ),
-                ),
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  'R\$ ${tr.valor.toStringAsFixed(2)}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: corPrimaria,
-                  ),
-                ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    tr.titulo,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: corPrimaria as Color,
+                      width: 2,
                     ),
                   ),
-                  Text(
-                    DateFormat('d MMM y').format(tr.data),
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    'R\$ ${tr.valor.toStringAsFixed(2)}',
                     style: TextStyle(
-                      color: cinza600,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: corPrimaria,
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
-        );
-      }).toList(),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      tr.titulo,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      DateFormat('d MMM y').format(tr.data),
+                      style: TextStyle(
+                        color: cinza600,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

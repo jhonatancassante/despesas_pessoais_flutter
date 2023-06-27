@@ -27,6 +27,42 @@ class _UsuarioTransacaoState extends State<UsuarioTransacao> {
       valor: 210.30,
       data: DateTime.now(),
     ),
+    Transacao(
+      id: 't3',
+      titulo: 'Novo Tênis de Corrida',
+      valor: 310.76,
+      data: DateTime.now(),
+    ),
+    Transacao(
+      id: 't4',
+      titulo: 'Conta de Luz',
+      valor: 210.30,
+      data: DateTime.now(),
+    ),
+    Transacao(
+      id: 't5',
+      titulo: 'Novo Tênis de Corrida',
+      valor: 310.76,
+      data: DateTime.now(),
+    ),
+    Transacao(
+      id: 't6',
+      titulo: 'Conta de Luz',
+      valor: 210.30,
+      data: DateTime.now(),
+    ),
+    Transacao(
+      id: 't7',
+      titulo: 'Novo Tênis de Corrida',
+      valor: 310.76,
+      data: DateTime.now(),
+    ),
+    Transacao(
+      id: 't8',
+      titulo: 'Conta de Luz',
+      valor: 210.30,
+      data: DateTime.now(),
+    ),
   ];
 
   _adicionaTransacao(String titulo, double valor) {
@@ -46,8 +82,8 @@ class _UsuarioTransacaoState extends State<UsuarioTransacao> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ListaTransacao(_transacoes),
         FormularioTransacao(_adicionaTransacao),
+        ListaTransacao(_transacoes),
       ],
     );
   }
