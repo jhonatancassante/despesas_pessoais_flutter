@@ -11,12 +11,11 @@ class DespesasPessoais extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData tema = ThemeData();
+    final ThemeData tema = ThemeData(
+      fontFamily: 'Quicksand',
+    );
 
     return MaterialApp(
-      // theme: ThemeData(
-      //   colorSchemeSeed: Colors.purple[900],
-      // ),
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
           primary: Colors.purple[900],
@@ -25,7 +24,7 @@ class DespesasPessoais extends StatelessWidget {
         textTheme: tema.textTheme.copyWith(
           titleLarge: const TextStyle(
             fontFamily: 'OpenSans',
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),

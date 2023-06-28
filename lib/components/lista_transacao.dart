@@ -47,10 +47,7 @@ class ListaTransacao extends StatelessWidget {
                   children: [
                     Text(
                       tr.titulo,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
                     Text(
                       DateFormat('d MMM y').format(tr.data),
