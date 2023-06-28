@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
-class FormularioTransacao extends StatelessWidget {
-  final tituloController = TextEditingController();
-  final valorController = TextEditingController();
-
+class FormularioTransacao extends StatefulWidget {
   final void Function(String, double) aoEnviar;
 
-  final _formKey = GlobalKey<FormState>();
+  const FormularioTransacao(this.aoEnviar, {super.key});
 
-  FormularioTransacao(this.aoEnviar, {super.key});
+  @override
+  State<FormularioTransacao> createState() => _FormularioTransacaoState();
+}
+
+class _FormularioTransacaoState extends State<FormularioTransacao> {
+  final tituloController = TextEditingController();
+
+  final valorController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   String? _validarCampo(valor) {
     if (valor == null || valor.isEmpty) {
@@ -21,7 +27,7 @@ class FormularioTransacao extends StatelessWidget {
     if (_formKey.currentState!.validate()) {
       final titulo = tituloController.text;
       final valor = double.tryParse(valorController.text) ?? 0.0;
-      aoEnviar(titulo, valor);
+      widget.aoEnviar(titulo, valor);
     }
   }
 
