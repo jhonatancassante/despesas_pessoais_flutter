@@ -16,11 +16,19 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
 
   final _formKey = GlobalKey<FormState>();
 
-  String? _validarCampo(valor) {
+  String? _validarCampoVazio(valor) {
     if (valor == null || valor.isEmpty) {
       return 'Esse campo não pode estar vazio!';
     }
     return null;
+  }
+
+  String? _validarCampoDouble(valor) {
+    if (!valor.isEmpty && double.tryParse(valor) == null) {
+      return 'Valor inválido! Utilize o ponto ao invés da vírgula.';
+    }
+
+    return _validarCampoVazio(valor);
   }
 
   _enviarFormulario() {
@@ -53,7 +61,7 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
                 decoration: const InputDecoration(
                   labelText: 'Título',
                 ),
-                validator: _validarCampo,
+                validator: _validarCampoVazio,
               ),
               TextFormField(
                 controller: valorController,
@@ -64,7 +72,7 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
                 decoration: const InputDecoration(
                   labelText: 'Valor (R\$)',
                 ),
-                validator: _validarCampo,
+                validator: _validarCampoDouble,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
