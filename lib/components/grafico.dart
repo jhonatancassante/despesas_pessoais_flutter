@@ -37,6 +37,7 @@ class Grafico extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    agruparTransacoes;
     return const Card(
       elevation: 6,
       margin: EdgeInsets.all(20),

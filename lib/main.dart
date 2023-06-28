@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'components/formulario_transacao.dart';
 import 'components/lista_transacao.dart';
+import 'components/grafico.dart';
 import 'models/transacao.dart';
 
 main() => runApp(const DespesasPessoais());
@@ -55,19 +56,39 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final List<Transacao> _transacoes = [
-    // Transacao(
-    //   id: 't1',
-    //   titulo: 'Novo Tênis de Corrida',
-    //   valor: 310.76,
-    //   data: DateTime.now(),
-    // ),
-    // Transacao(
-    //   id: 't2',
-    //   titulo: 'Conta de Luz',
-    //   valor: 210.30,
-    //   data: DateTime.now(),
-    // ),
+    Transacao(
+      id: 't0',
+      titulo: 'Conta Antiga',
+      valor: 400.00,
+      data: DateTime.now().subtract(const Duration(days: 33)),
+    ),
+    Transacao(
+      id: 't1',
+      titulo: 'Novo Tênis de Corrida',
+      valor: 310.76,
+      data: DateTime.now().subtract(const Duration(days: 3)),
+    ),
+    Transacao(
+      id: 't2',
+      titulo: 'Conta de Luz',
+      valor: 210.30,
+      data: DateTime.now().subtract(const Duration(days: 4)),
+    ),
+    Transacao(
+      id: 't3',
+      titulo: 'Conta de Água',
+      valor: 108.30,
+      data: DateTime.now().subtract(const Duration(days: 0)),
+    ),
   ];
+
+  List<Transacao> get _transacoesRecentes {
+    return _transacoes.where((tr) {
+      return tr.data.isAfter(DateTime.now().subtract(
+        const Duration(days: 6),
+      ));
+    }).toList();
+  }
 
   _adicionaTransacao(String titulo, double valor) {
     final novaTransacao = Transacao(
@@ -110,14 +131,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const SizedBox(
-              child: Card(
-                elevation: 5,
-                child: Text(
-                  'Gráfico',
-                ),
-              ),
-            ),
+            Grafico(_transacoesRecentes),
             ListaTransacao(_transacoes),
           ],
         ),
