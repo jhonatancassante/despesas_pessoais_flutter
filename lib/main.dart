@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'components/formulario_transacao.dart';
 import 'components/lista_transacao.dart';
-import 'styles/cores.dart';
 import 'models/transacao.dart';
 
 main() => runApp(const DespesasPessoais());
@@ -12,9 +11,36 @@ class DespesasPessoais extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData tema = ThemeData();
+
     return MaterialApp(
-      theme: ThemeData(
-        colorSchemeSeed: Colors.purple[900],
+      // theme: ThemeData(
+      //   colorSchemeSeed: Colors.purple[900],
+      // ),
+      theme: tema.copyWith(
+        colorScheme: tema.colorScheme.copyWith(
+          primary: Colors.purple[900],
+          secondary: Colors.amber,
+        ),
+        textTheme: tema.textTheme.copyWith(
+          titleLarge: const TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+          displaySmall: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[600],
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       home: const HomePage(),
     );
@@ -99,7 +125,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _abrirFormularioDeTransacaoModal(context),
-        backgroundColor: corPrimaria,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

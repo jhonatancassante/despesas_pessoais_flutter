@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import '../models/transacao.dart';
-import '../styles/cores.dart';
 
 class ListaTransacao extends StatelessWidget {
   final List<Transacao> transacoes;
@@ -26,7 +25,7 @@ class ListaTransacao extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: corPrimaria as Color,
+                      color: Theme.of(context).colorScheme.primary,
                       width: 2,
                     ),
                   ),
@@ -36,7 +35,7 @@ class ListaTransacao extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: corPrimaria,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ),
@@ -52,9 +51,7 @@ class ListaTransacao extends StatelessWidget {
                     ),
                     Text(
                       DateFormat('d MMM y').format(tr.data),
-                      style: TextStyle(
-                        color: cinza600,
-                      ),
+                      style: Theme.of(context).textTheme.displaySmall,
                     ),
                   ],
                 ),
