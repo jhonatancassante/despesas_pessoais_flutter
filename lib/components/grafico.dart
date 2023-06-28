@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:despesas_pessoal/models/transacao.dart';
+import '../models/transacao.dart';
+import 'grafico_barra.dart';
 
 class Grafico extends StatelessWidget {
   final List<Transacao> transacoesRecentes;
@@ -25,9 +26,6 @@ class Grafico extends StatelessWidget {
         }
       }
 
-      print(DateFormat.E().format(diaSemana)[0]);
-      print(somaTotal);
-
       return {
         'dia': DateFormat.E().format(diaSemana)[0],
         'valor': somaTotal,
@@ -37,12 +35,18 @@ class Grafico extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    agruparTransacoes;
-    return const Card(
+    return Card(
       elevation: 6,
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       child: Row(
-        children: [],
+        children: agruparTransacoes.map((tr) {
+          // return Text('${tr['dia']}: ${tr['valor']}');
+          return GraficoBarra(
+            valor: tr['valor'] as double,
+            percentual: 0.5,
+            rotulo: tr['dia'].toString(),
+          );
+        }).toList(),
       ),
     );
   }
