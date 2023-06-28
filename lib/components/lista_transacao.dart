@@ -28,6 +28,9 @@ class ListaTransacao extends StatelessWidget {
                       color: Theme.of(context).colorScheme.primary,
                       width: 2,
                     ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(12),
+                    ),
                   ),
                   padding: const EdgeInsets.all(10),
                   child: Text(

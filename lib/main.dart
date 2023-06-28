@@ -20,7 +20,7 @@ class DespesasPessoais extends StatelessWidget {
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
           primary: Colors.purple[900],
-          secondary: Colors.amber,
+          secondary: Colors.deepOrange,
         ),
         textTheme: tema.textTheme.copyWith(
           titleLarge: const TextStyle(
@@ -125,7 +125,6 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _abrirFormularioDeTransacaoModal(context),
-        backgroundColor: Theme.of(context).colorScheme.primary,
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
