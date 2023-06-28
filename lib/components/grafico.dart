@@ -44,15 +44,21 @@ class Grafico extends StatelessWidget {
     return Card(
       elevation: 6,
       margin: const EdgeInsets.all(20),
-      child: Row(
-        children: agruparTransacoes.map((tr) {
-          // return Text('${tr['dia']}: ${tr['valor']}');
-          return GraficoBarra(
-            rotulo: tr['dia'].toString(),
-            valor: tr['valor'] as double,
-            percentual: (tr['valor'] as double) / _valorTotalSemana,
-          );
-        }).toList(),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: agruparTransacoes.map((tr) {
+            return Flexible(
+              fit: FlexFit.tight,
+              child: GraficoBarra(
+                rotulo: tr['dia'].toString(),
+                valor: tr['valor'] as double,
+                percentual: (tr['valor'] as double) / _valorTotalSemana,
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
   }
