@@ -33,6 +33,12 @@ class Grafico extends StatelessWidget {
     });
   }
 
+  double get _valorTotalSemana {
+    return agruparTransacoes.fold(0, (som, tr) {
+      return som + (tr['valor'] as double);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -42,9 +48,9 @@ class Grafico extends StatelessWidget {
         children: agruparTransacoes.map((tr) {
           // return Text('${tr['dia']}: ${tr['valor']}');
           return GraficoBarra(
-            valor: tr['valor'] as double,
-            percentual: 0.5,
             rotulo: tr['dia'].toString(),
+            valor: tr['valor'] as double,
+            percentual: (tr['valor'] as double) / _valorTotalSemana,
           );
         }).toList(),
       ),

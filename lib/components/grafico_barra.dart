@@ -6,9 +6,9 @@ class GraficoBarra extends StatelessWidget {
   final double percentual;
 
   const GraficoBarra({
+    required this.rotulo,
     required this.valor,
     required this.percentual,
-    required this.rotulo,
     super.key,
   });
 
