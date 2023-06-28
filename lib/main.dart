@@ -55,6 +55,8 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _transacoes.add(novaTransacao);
     });
+
+    Navigator.of(context).pop();
   }
 
   _abrirFormularioDeTransacaoModal(BuildContext context) {

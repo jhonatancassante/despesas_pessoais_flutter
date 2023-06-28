@@ -34,6 +34,7 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
   _cancelarFormulario() {
     tituloController.clear();
     valorController.clear();
+    Navigator.of(context).pop();
   }
 
   @override
