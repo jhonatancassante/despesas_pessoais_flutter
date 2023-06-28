@@ -78,6 +78,18 @@ class _HomePageState extends State<HomePage> {
       id: 't3',
       titulo: 'Conta de Água',
       valor: 108.30,
+      data: DateTime.now().subtract(const Duration(days: 2)),
+    ),
+    Transacao(
+      id: 't4',
+      titulo: 'Cartão de Crédito',
+      valor: 105848.30,
+      data: DateTime.now().subtract(const Duration(days: 1)),
+    ),
+    Transacao(
+      id: 't3',
+      titulo: 'Lanche',
+      valor: 8.30,
       data: DateTime.now().subtract(const Duration(days: 0)),
     ),
   ];

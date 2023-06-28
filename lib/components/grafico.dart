@@ -30,7 +30,7 @@ class Grafico extends StatelessWidget {
         'dia': DateFormat.E().format(diaSemana)[0],
         'valor': somaTotal,
       };
-    });
+    }).reversed.toList();
   }
 
   double get _valorTotalSemana {

@@ -18,8 +18,11 @@ class GraficoBarra extends StatelessWidget {
       padding: const EdgeInsets.all(2.0),
       child: Column(
         children: [
-          FittedBox(
-            child: Text('R\$ ${valor.toStringAsFixed(2)}'),
+          SizedBox(
+            height: 20,
+            child: FittedBox(
+              child: Text('R\$ ${valor.toStringAsFixed(2)}'),
+            ),
           ),
           Container(
             margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
