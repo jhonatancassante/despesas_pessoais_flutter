@@ -84,6 +84,36 @@ class _HomePageState extends State<HomePage> {
     Navigator.of(context).pop();
   }
 
+  _excluirTransacao(String id) {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+          title: const Text('Confirmação de Exclusão'),
+          content:
+              const Text('Você tem certeza que deseja excluir essa transação?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Não'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  _transacoes.removeWhere((tr) => tr.id == id);
+                });
+                Navigator.of(context).pop();
+              },
+              child: const Text('Sim'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   _abrirFormularioDeTransacaoModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
@@ -111,7 +141,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Grafico(_transacoesRecentes),
-            ListaTransacao(_transacoes),
+            ListaTransacao(_transacoes, _excluirTransacao),
           ],
         ),
       ),
