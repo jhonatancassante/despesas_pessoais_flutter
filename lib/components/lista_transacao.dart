@@ -62,7 +62,7 @@ class ListaTransacao extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     subtitle: Text(
-                      DateFormat('d MMM y').format(tr.data),
+                      DateFormat('dd MMM y').format(tr.data),
                     ),
                   ),
                 );

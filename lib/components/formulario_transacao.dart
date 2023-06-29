@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class FormularioTransacao extends StatefulWidget {
-  final void Function(String, double) aoEnviar;
+  final void Function(String, double, DateTime) aoEnviar;
 
   const FormularioTransacao(this.aoEnviar, {super.key});
 
@@ -13,7 +13,7 @@ class FormularioTransacao extends StatefulWidget {
 class _FormularioTransacaoState extends State<FormularioTransacao> {
   final _tituloController = TextEditingController();
   final _valorController = TextEditingController();
-  DateTime? _dataSelecionada;
+  DateTime _dataSelecionada = DateTime.now();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -36,14 +36,14 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
     if (_formKey.currentState!.validate()) {
       final titulo = _tituloController.text;
       final valor = double.tryParse(_valorController.text) ?? 0.0;
-      widget.aoEnviar(titulo, valor);
+      widget.aoEnviar(titulo, valor, _dataSelecionada);
     }
   }
 
   _cancelarFormulario() {
     _tituloController.clear();
     _valorController.clear();
-    _dataSelecionada = null;
+    _dataSelecionada = DateTime.now();
     Navigator.of(context).pop();
   }
 
@@ -53,6 +53,7 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
       initialDate: DateTime.now(),
       firstDate: DateTime(2020),
       lastDate: DateTime.now(),
+      // locale: MaterialLocalizationPt(),
     ).then((data) {
       if (data == null) {
         return;
@@ -98,9 +99,7 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
                   children: [
                     Expanded(
                       child: Text(
-                        _dataSelecionada == null
-                            ? 'Nenhuma data selecionada!'
-                            : 'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada!)}',
+                        'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}',
                       ),
                     ),
                     TextButton(

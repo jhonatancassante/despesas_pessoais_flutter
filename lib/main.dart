@@ -18,11 +18,8 @@ class DespesasPessoais extends StatelessWidget {
     );
 
     return MaterialApp(
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate
-      ],
-      supportedLocales: const [Locale('pt', 'BR')],
+      localizationsDelegates: const [GlobalMaterialLocalizations.delegate],
+      supportedLocales: const [Locale('pt')],
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
           primary: Colors.purple[900],
@@ -72,12 +69,12 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  _adicionaTransacao(String titulo, double valor) {
+  _adicionaTransacao(String titulo, double valor, DateTime data) {
     final novaTransacao = Transacao(
       id: Random().nextDouble().toString(),
       titulo: titulo,
       valor: valor,
-      data: DateTime.now(),
+      data: data,
     );
 
     setState(() {

@@ -27,7 +27,7 @@ class Grafico extends StatelessWidget {
       }
 
       return {
-        'dia': DateFormat.E('pt_BR').format(diaSemana)[0].toUpperCase(),
+        'dia': DateFormat.E('pt').format(diaSemana)[0].toUpperCase(),
         'valor': somaTotal,
       };
     }).reversed.toList();
