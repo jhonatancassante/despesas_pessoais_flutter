@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class FormularioTransacao extends StatefulWidget {
   final void Function(String, double) aoEnviar;
@@ -10,9 +11,9 @@ class FormularioTransacao extends StatefulWidget {
 }
 
 class _FormularioTransacaoState extends State<FormularioTransacao> {
-  final tituloController = TextEditingController();
-
-  final valorController = TextEditingController();
+  final _tituloController = TextEditingController();
+  final _valorController = TextEditingController();
+  DateTime? _dataSelecionada;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -33,16 +34,33 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
 
   _enviarFormulario() {
     if (_formKey.currentState!.validate()) {
-      final titulo = tituloController.text;
-      final valor = double.tryParse(valorController.text) ?? 0.0;
+      final titulo = _tituloController.text;
+      final valor = double.tryParse(_valorController.text) ?? 0.0;
       widget.aoEnviar(titulo, valor);
     }
   }
 
   _cancelarFormulario() {
-    tituloController.clear();
-    valorController.clear();
+    _tituloController.clear();
+    _valorController.clear();
+    _dataSelecionada = null;
     Navigator.of(context).pop();
+  }
+
+  _mostrarSeletorData() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime.now(),
+    ).then((data) {
+      if (data == null) {
+        return;
+      }
+      setState(() {
+        _dataSelecionada = data;
+      });
+    });
   }
 
   @override
@@ -56,7 +74,7 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
           child: Column(
             children: [
               TextFormField(
-                controller: tituloController,
+                controller: _tituloController,
                 onFieldSubmitted: (_) => _enviarFormulario(),
                 decoration: const InputDecoration(
                   labelText: 'Título',
@@ -64,7 +82,7 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
                 validator: _validarCampoVazio,
               ),
               TextFormField(
-                controller: valorController,
+                controller: _valorController,
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
@@ -74,16 +92,43 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
                 ),
                 validator: _validarCampoDouble,
               ),
+              SizedBox(
+                height: 70,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _dataSelecionada == null
+                            ? 'Nenhuma data selecionada!'
+                            : 'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada!)}',
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: _mostrarSeletorData,
+                      child: const Text(
+                        'Selecionar data',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextButton(
+                  FilledButton(
                     onPressed: _cancelarFormulario,
-                    child: const Text('Cancelar'),
+                    child: const Text(
+                      'Cancelar',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  TextButton(
+                  FilledButton(
                     onPressed: _enviarFormulario,
-                    child: const Text('Nova Transação'),
+                    child: const Text(
+                      'Nova Transação',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),

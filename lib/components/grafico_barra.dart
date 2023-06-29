@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class GraficoBarra extends StatelessWidget {
   final String rotulo;
@@ -21,7 +22,14 @@ class GraficoBarra extends StatelessWidget {
           SizedBox(
             height: 20,
             child: FittedBox(
-              child: Text('R\$ ${valor.toStringAsFixed(2)}'),
+              child: Text(
+                valor > 1000
+                    ? NumberFormat.compactCurrency(
+                        decimalDigits: 1,
+                        symbol: '',
+                      ).format(valor)
+                    : valor.toStringAsFixed(2),
+              ),
             ),
           ),
           Container(

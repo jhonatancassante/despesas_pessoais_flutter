@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'dart:math';
 import 'components/formulario_transacao.dart';
 import 'components/lista_transacao.dart';
@@ -17,6 +18,11 @@ class DespesasPessoais extends StatelessWidget {
     );
 
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      supportedLocales: const [Locale('pt', 'BR')],
       theme: tema.copyWith(
         colorScheme: tema.colorScheme.copyWith(
           primary: Colors.purple[900],
@@ -29,9 +35,10 @@ class DespesasPessoais extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
-          displaySmall: TextStyle(
-            fontSize: 14,
-            color: Colors.grey[600],
+          displaySmall: const TextStyle(
+            fontFamily: 'Quicksand',
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
           ),
         ),
         appBarTheme: const AppBarTheme(
@@ -55,44 +62,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Transacao> _transacoes = [
-    Transacao(
-      id: 't0',
-      titulo: 'Conta Antiga',
-      valor: 400.00,
-      data: DateTime.now().subtract(const Duration(days: 33)),
-    ),
-    Transacao(
-      id: 't1',
-      titulo: 'Novo Tênis de Corrida',
-      valor: 310.76,
-      data: DateTime.now().subtract(const Duration(days: 3)),
-    ),
-    Transacao(
-      id: 't2',
-      titulo: 'Conta de Luz',
-      valor: 210.30,
-      data: DateTime.now().subtract(const Duration(days: 4)),
-    ),
-    Transacao(
-      id: 't3',
-      titulo: 'Conta de Água',
-      valor: 108.30,
-      data: DateTime.now().subtract(const Duration(days: 2)),
-    ),
-    Transacao(
-      id: 't4',
-      titulo: 'Cartão de Crédito',
-      valor: 105848.30,
-      data: DateTime.now().subtract(const Duration(days: 1)),
-    ),
-    Transacao(
-      id: 't3',
-      titulo: 'Lanche',
-      valor: 8.30,
-      data: DateTime.now().subtract(const Duration(days: 0)),
-    ),
-  ];
+  final List<Transacao> _transacoes = [];
 
   List<Transacao> get _transacoesRecentes {
     return _transacoes.where((tr) {

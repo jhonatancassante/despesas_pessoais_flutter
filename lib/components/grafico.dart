@@ -27,7 +27,7 @@ class Grafico extends StatelessWidget {
       }
 
       return {
-        'dia': DateFormat.E().format(diaSemana)[0],
+        'dia': DateFormat.E('pt_BR').format(diaSemana)[0].toUpperCase(),
         'valor': somaTotal,
       };
     }).reversed.toList();
@@ -54,7 +54,9 @@ class Grafico extends StatelessWidget {
               child: GraficoBarra(
                 rotulo: tr['dia'].toString(),
                 valor: tr['valor'] as double,
-                percentual: (tr['valor'] as double) / _valorTotalSemana,
+                percentual: _valorTotalSemana == 0
+                    ? 0
+                    : (tr['valor'] as double) / _valorTotalSemana,
               ),
             );
           }).toList(),

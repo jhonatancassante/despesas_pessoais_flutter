@@ -48,7 +48,11 @@ class ListaTransacao extends StatelessWidget {
                         padding: const EdgeInsets.all(6.0),
                         child: FittedBox(
                           child: Text(
-                            'R\$ ${tr.valor.toStringAsFixed(2)}',
+                            'R\$ ${tr.valor > 1000 ? NumberFormat.compactCurrency(
+                                decimalDigits: 1,
+                                symbol: '',
+                              ).format(tr.valor) : tr.valor.toStringAsFixed(2)}',
+                            style: Theme.of(context).textTheme.displaySmall,
                           ),
                         ),
                       ),
