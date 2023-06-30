@@ -190,11 +190,11 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             SizedBox(
-              height: alturaDisponivel * 0.3,
+              height: alturaDisponivel * 0.25,
               child: Grafico(_transacoesRecentes),
             ),
             SizedBox(
-              height: alturaDisponivel * 0.7,
+              height: alturaDisponivel * 0.75,
               child: ListaTransacao(_transacoes, _excluirTransacao),
             ),
           ],

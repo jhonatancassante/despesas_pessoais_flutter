@@ -15,55 +15,66 @@ class GraficoBarra extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-            child: FittedBox(
-              child: Text(
-                valor > 1000
-                    ? NumberFormat.compactCurrency(
-                        decimalDigits: 1,
-                        symbol: '',
-                      ).format(valor)
-                    : valor.toStringAsFixed(2),
+    return LayoutBuilder(
+      builder: (ctx, constraints) {
+        return Column(
+          children: [
+            SizedBox(
+              height: constraints.maxHeight * 0.15,
+              child: FittedBox(
+                child: Text(
+                  valor > 1000
+                      ? NumberFormat.compactCurrency(
+                          decimalDigits: 1,
+                          symbol: '',
+                        ).format(valor)
+                      : valor.toStringAsFixed(2),
+                ),
               ),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-            height: 60,
-            width: 10,
-            child: Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey,
-                      width: 1.0,
-                    ),
-                    color: const Color.fromRGBO(220, 220, 220, 1),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
-                FractionallySizedBox(
-                  heightFactor: percentual,
-                  child: Container(
+            SizedBox(
+              height: constraints.maxHeight * 0.05,
+            ),
+            SizedBox(
+              height: constraints.maxHeight * 0.6,
+              width: 10,
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 1.0,
+                      ),
+                      color: const Color.fromRGBO(220, 220, 220, 1),
                       borderRadius: BorderRadius.circular(5),
                     ),
                   ),
-                ),
-              ],
+                  FractionallySizedBox(
+                    heightFactor: percentual,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Text(rotulo),
-        ],
-      ),
+            SizedBox(
+              height: constraints.maxHeight * 0.05,
+            ),
+            SizedBox(
+              height: constraints.maxHeight * 0.15,
+              child: FittedBox(
+                child: Text(rotulo),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
