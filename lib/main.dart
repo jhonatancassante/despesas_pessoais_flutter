@@ -46,7 +46,7 @@ class DespesasPessoais extends StatelessWidget {
           ),
         ),
       ),
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
@@ -59,6 +59,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool _mostrarGrafico = false;
+
   final List<Transacao> _transacoes = [
     Transacao(
       id: 't0',
@@ -168,9 +170,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool emPaisagem =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     final appBar = AppBar(
       title: const Text('Despesas Pessoais'),
       actions: [
+        if (emPaisagem)
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _mostrarGrafico = !_mostrarGrafico;
+              });
+            },
+            icon: Icon(_mostrarGrafico ? Icons.list : Icons.show_chart),
+          ),
         IconButton(
           onPressed: () => _abrirFormularioDeTransacaoModal(context),
           icon: const Icon(Icons.add),
@@ -189,14 +203,16 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SizedBox(
-              height: alturaDisponivel * 0.25,
-              child: Grafico(_transacoesRecentes),
-            ),
-            SizedBox(
-              height: alturaDisponivel * 0.75,
-              child: ListaTransacao(_transacoes, _excluirTransacao),
-            ),
+            if (_mostrarGrafico || !emPaisagem)
+              SizedBox(
+                height: alturaDisponivel * (emPaisagem ? 0.8 : 0.3),
+                child: Grafico(_transacoesRecentes),
+              ),
+            if (!_mostrarGrafico || !emPaisagem)
+              SizedBox(
+                height: alturaDisponivel * (emPaisagem ? 1 : 0.7),
+                child: ListaTransacao(_transacoes, _excluirTransacao),
+              ),
           ],
         ),
       ),
