@@ -70,7 +70,7 @@ class ListaTransacao extends StatelessWidget {
                   subtitle: Text(
                     DateFormat('dd MMM y').format(tr.data),
                   ),
-                  trailing: MediaQuery.of(context).size.width > 400
+                  trailing: MediaQuery.of(context).size.width > 480
                       ? TextButton.icon(
                           onPressed: () => aoRemover(tr.id),
                           icon: Icon(
