@@ -46,7 +46,7 @@ class DespesasPessoais extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
@@ -59,7 +59,50 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Transacao> _transacoes = [];
+  final List<Transacao> _transacoes = [
+    Transacao(
+      id: 't0',
+      titulo: 'Conta Antiga',
+      valor: 400.00,
+      data: DateTime.now().subtract(const Duration(days: 33)),
+    ),
+    Transacao(
+      id: 't1',
+      titulo: 'Novo Tênis de Corrida',
+      valor: 310.76,
+      data: DateTime.now().subtract(const Duration(days: 3)),
+    ),
+    Transacao(
+      id: 't2',
+      titulo: 'Conta de Luz',
+      valor: 210.30,
+      data: DateTime.now().subtract(const Duration(days: 4)),
+    ),
+    Transacao(
+      id: 't3',
+      titulo: 'Conta de Água',
+      valor: 108.30,
+      data: DateTime.now().subtract(const Duration(days: 2)),
+    ),
+    Transacao(
+      id: 't4',
+      titulo: 'Cartão de Crédito',
+      valor: 1230.30,
+      data: DateTime.now().subtract(const Duration(days: 1)),
+    ),
+    Transacao(
+      id: 't5',
+      titulo: 'Lanche',
+      valor: 8.30,
+      data: DateTime.now().subtract(const Duration(days: 0)),
+    ),
+    Transacao(
+      id: 't6',
+      titulo: 'Docinho',
+      valor: 12.00,
+      data: DateTime.now().subtract(const Duration(days: 0)),
+    ),
+  ];
 
   List<Transacao> get _transacoesRecentes {
     return _transacoes.where((tr) {
@@ -125,23 +168,35 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appBar = AppBar(
+      title: const Text('Despesas Pessoais'),
+      actions: [
+        IconButton(
+          onPressed: () => _abrirFormularioDeTransacaoModal(context),
+          icon: const Icon(Icons.add),
+        ),
+      ],
+      // backgroundColor: corPrimaria,
+    );
+
+    final alturaDisponivel = MediaQuery.of(context).size.height -
+        appBar.preferredSize.height -
+        MediaQuery.of(context).padding.top;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Despesas Pessoais'),
-        actions: [
-          IconButton(
-            onPressed: () => _abrirFormularioDeTransacaoModal(context),
-            icon: const Icon(Icons.add),
-          ),
-        ],
-        // backgroundColor: corPrimaria,
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Grafico(_transacoesRecentes),
-            ListaTransacao(_transacoes, _excluirTransacao),
+            SizedBox(
+              height: alturaDisponivel * 0.3,
+              child: Grafico(_transacoesRecentes),
+            ),
+            SizedBox(
+              height: alturaDisponivel * 0.7,
+              child: ListaTransacao(_transacoes, _excluirTransacao),
+            ),
           ],
         ),
       ),
