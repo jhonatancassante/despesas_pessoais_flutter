@@ -66,72 +66,79 @@ class _FormularioTransacaoState extends State<FormularioTransacao> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Card(
-        elevation: 5,
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _tituloController,
-                onFieldSubmitted: (_) => _enviarFormulario(),
-                decoration: const InputDecoration(
-                  labelText: 'Título',
+    return SingleChildScrollView(
+      child: Form(
+        key: _formKey,
+        child: Card(
+          elevation: 5,
+          child: Padding(
+            padding: EdgeInsets.only(
+              top: 10,
+              right: 10,
+              left: 10,
+              bottom: 10 + MediaQuery.of(context).viewInsets.bottom,
+            ),
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _tituloController,
+                  onFieldSubmitted: (_) => _enviarFormulario(),
+                  decoration: const InputDecoration(
+                    labelText: 'Título',
+                  ),
+                  validator: _validarCampoVazio,
                 ),
-                validator: _validarCampoVazio,
-              ),
-              TextFormField(
-                controller: _valorController,
-                keyboardType: const TextInputType.numberWithOptions(
-                  decimal: true,
+                TextFormField(
+                  controller: _valorController,
+                  keyboardType: const TextInputType.numberWithOptions(
+                    decimal: true,
+                  ),
+                  onFieldSubmitted: (_) => _enviarFormulario(),
+                  decoration: const InputDecoration(
+                    labelText: 'Valor (R\$)',
+                  ),
+                  validator: _validarCampoDouble,
                 ),
-                onFieldSubmitted: (_) => _enviarFormulario(),
-                decoration: const InputDecoration(
-                  labelText: 'Valor (R\$)',
-                ),
-                validator: _validarCampoDouble,
-              ),
-              SizedBox(
-                height: 70,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}',
+                SizedBox(
+                  height: 70,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          'Data selecionada ${DateFormat('dd/MM/y').format(_dataSelecionada)}',
+                        ),
                       ),
-                    ),
-                    TextButton(
-                      onPressed: _mostrarSeletorData,
+                      TextButton(
+                        onPressed: _mostrarSeletorData,
+                        child: const Text(
+                          'Selecionar data',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    FilledButton(
+                      onPressed: _cancelarFormulario,
                       child: const Text(
-                        'Selecionar data',
+                        'Cancelar',
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    )
+                    ),
+                    FilledButton(
+                      onPressed: _enviarFormulario,
+                      child: const Text(
+                        'Nova Transação',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
                   ],
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  FilledButton(
-                    onPressed: _cancelarFormulario,
-                    child: const Text(
-                      'Cancelar',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  FilledButton(
-                    onPressed: _enviarFormulario,
-                    child: const Text(
-                      'Nova Transação',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
