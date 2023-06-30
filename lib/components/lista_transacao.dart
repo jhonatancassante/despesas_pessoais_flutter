@@ -70,11 +70,25 @@ class ListaTransacao extends StatelessWidget {
                   subtitle: Text(
                     DateFormat('dd MMM y').format(tr.data),
                   ),
-                  trailing: IconButton(
-                    onPressed: () => aoRemover(tr.id),
-                    icon: const Icon(Icons.delete),
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 400
+                      ? TextButton.icon(
+                          onPressed: () => aoRemover(tr.id),
+                          icon: Icon(
+                            Icons.delete,
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                          label: Text(
+                            'Excluir',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.error,
+                            ),
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: () => aoRemover(tr.id),
+                          icon: const Icon(Icons.delete),
+                          color: Theme.of(context).colorScheme.error,
+                        ),
                 ),
               );
             },
