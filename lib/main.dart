@@ -170,8 +170,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    bool emPaisagem =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+    bool emPaisagem = mediaQuery.orientation == Orientation.landscape;
 
     final appBar = AppBar(
       title: const Text('Despesas Pessoais'),
@@ -193,9 +193,9 @@ class _HomePageState extends State<HomePage> {
       // backgroundColor: corPrimaria,
     );
 
-    final alturaDisponivel = MediaQuery.of(context).size.height -
+    final alturaDisponivel = mediaQuery.size.height -
         appBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
+        mediaQuery.padding.top;
 
     return Scaffold(
       appBar: appBar,

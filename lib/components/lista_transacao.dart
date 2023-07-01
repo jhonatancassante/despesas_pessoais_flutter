@@ -10,6 +10,7 @@ class ListaTransacao extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tema = Theme.of(context);
     return transacoes.isEmpty
         ? LayoutBuilder(
             builder: (context, constraints) {
@@ -20,7 +21,7 @@ class ListaTransacao extends StatelessWidget {
                   ),
                   Text(
                     'Nenhuma transação cadastrada...',
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: tema.textTheme.titleLarge,
                   ),
                   const SizedBox(
                     height: 20,
@@ -49,7 +50,7 @@ class ListaTransacao extends StatelessWidget {
                 child: ListTile(
                   leading: CircleAvatar(
                     radius: 30,
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    backgroundColor: tema.colorScheme.primary,
                     child: Padding(
                       padding: const EdgeInsets.all(6.0),
                       child: FittedBox(
@@ -58,14 +59,14 @@ class ListaTransacao extends StatelessWidget {
                               decimalDigits: 1,
                               symbol: '',
                             ).format(tr.valor) : tr.valor.toStringAsFixed(2)}',
-                          style: Theme.of(context).textTheme.displaySmall,
+                          style: tema.textTheme.displaySmall,
                         ),
                       ),
                     ),
                   ),
                   title: Text(
                     tr.titulo,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: tema.textTheme.titleLarge,
                   ),
                   subtitle: Text(
                     DateFormat('dd MMM y').format(tr.data),
@@ -75,19 +76,19 @@ class ListaTransacao extends StatelessWidget {
                           onPressed: () => aoRemover(tr.id),
                           icon: Icon(
                             Icons.delete,
-                            color: Theme.of(context).colorScheme.error,
+                            color: tema.colorScheme.error,
                           ),
                           label: Text(
                             'Excluir',
                             style: TextStyle(
-                              color: Theme.of(context).colorScheme.error,
+                              color: tema.colorScheme.error,
                             ),
                           ),
                         )
                       : IconButton(
                           onPressed: () => aoRemover(tr.id),
                           icon: const Icon(Icons.delete),
-                          color: Theme.of(context).colorScheme.error,
+                          color: tema.colorScheme.error,
                         ),
                 ),
               );
